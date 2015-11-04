@@ -3,18 +3,18 @@
   <head>
     <base target="_top">
     <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
-    
+
     <style>
       .init-message-container {
         width: 80%;
         margin: 0 auto;
       }
-      
+
       .init-message {
         font-size: 2em;
         line-height: 1.2em;
       }
-      
+
       #init-bar {
         text-align: center;
       }
@@ -27,7 +27,7 @@
     <div id='init-bar'>
       <input type='submit' value='Create TimelineJS Sheet' id='init'>
     </div>
-    
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
       $(function() {
@@ -36,10 +36,10 @@
           initSheet();
         });
       });
-      
+
       function initSheet() {
           this.disabled = true;
-          
+
           google.script.run
             .withSuccessHandler(
               function(msg, element) {
@@ -56,5 +56,3 @@
     </script>
   </body>
 </html>
-
-
