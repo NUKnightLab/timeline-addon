@@ -1,3 +1,5 @@
+/*global $, jQuery, alert*/
+
 $(document).ready(function() {
   $('.edit-event-element').css('display', 'none');
   $('#show-add-event').addClass('current-mode');
@@ -18,23 +20,9 @@ $(document).ready(function() {
     $('.select-minute').append('<option value="' + i + '">' + i + '</option>');
     $('.select-second').append('<option value="' + i + '">' + i + '</option>');
   }
+});
 
-  $(".required").change(function() {
-    $(this).css("color", checkRequired($(this)));
-    $(this).css("border-bottom-color", checkRequired($(this)));
-  });
-
-  $(".optional").change(function() {
-    $(this).css("color", checkOptional($(this)));
-    $(this).css("border-bottom-color", checkOptional($(this)));
-  });
-
-  $(".optional-num").change(function() {
-    $(this).css("color", checkOptionalNum($(this)));
-    $(this).css("border-bottom-color", checkOptionalNum($(this)));
-  });
-
-
+$(function () {
   $('#add-event').click(addData);
 
   $('#edit-current').click(function(event) {

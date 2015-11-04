@@ -3,22 +3,7 @@
   <head>
     <base target="_top">
     <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
-
-    <style>
-      .init-message-container {
-        width: 80%;
-        margin: 0 auto;
-      }
-
-      .init-message {
-        font-size: 2em;
-        line-height: 1.2em;
-      }
-
-      #init-bar {
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="Init.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
     <div class='init-message-container'>
@@ -29,30 +14,6 @@
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-      $(function() {
-        $('#init').on('click', function() {
-//        initSheet() must be wrapped in an anonymous function or else it just goes off at the start
-          initSheet();
-        });
-      });
-
-      function initSheet() {
-          this.disabled = true;
-
-          google.script.run
-            .withSuccessHandler(
-              function(msg, element) {
-                element.disabled = false;
-              })
-            .withFailureHandler(
-              function(msg, element) {
-                showError(msg, $('#init'));
-                element.disabled = false;
-              })
-            .withUserObject(this)
-            .initSheet();
-      }
-    </script>
+    <scrip src='Init.js'></script>
   </body>
 </html>

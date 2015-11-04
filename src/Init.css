@@ -1,0 +1,13 @@
+.init-message-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.init-message {
+  font-size: 2em;
+  line-height: 1.2em;
+}
+
+#init-bar {
+  text-align: center;
+}
