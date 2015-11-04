@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+    <style>
+      .init-message-container {
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      .init-message {
+        font-size: 2em;
+        line-height: 1.2em;
+      }
+
+      #init-bar {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='init-message-container'>
+      <h1 class='init-message'>It looks like you don't have your sheet set up properly for TimelineJS yet. Don't worry, we can do that for you.</h1>
+    </div>
+    <div id='init-bar'>
+      <input type='submit' value='Create TimelineJS Sheet' id='init'>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+      $(function() {
+        $('#init').on('click', function() {
+//        initSheet() must be wrapped in an anonymous function or else it just goes off at the start
+          initSheet();
+        });
+      });
+
+      function initSheet() {
+          this.disabled = true;
+
+          google.script.run
+            .withSuccessHandler(
+              function(msg, element) {
+                element.disabled = false;
+              })
+            .withFailureHandler(
+              function(msg, element) {
+                showError(msg, $('#init'));
+                element.disabled = false;
+              })
+            .withUserObject(this)
+            .initSheet();
+      }
+    </script>
+  </body>
+</html>
