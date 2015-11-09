@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+    <style>
+      /* grunt inline's way of doing things */
+      <inline src='Sidebar.css'/>
+    </style>
+
+  </head>
+  <body>
+  <div class='edit-modes'>
+    <div id='show-add-event'>Create New Event</div>
+    <div id='show-edit-event'>Edit Existing Event</div>
+  </div>
+
+  <form>
+  <div id='edit-bar' class='edit-event-element'>
+    <div class='edit-select' id='edit-previous'>Edit Previous Row</div>
+    <div class='edit-select' id='edit-current'>Edit Current Row</div>
+    <div class='edit-select' id='edit-next'>Edit Next Row</div>
+  </div>
+  <div class='headline'>
+    <input type='text' name='headline' placeholder='Headline' class='optional'>
+  </div>
+  <div class='text'>
+    <input type='text' name='text' placeholder='Text' class='optional'>
+  </div>
+  <div class='dates'>
+    <div class='dates-fields'>
+      <span><h3>Start Date</h3></span>
+      <input type='text' name='start-year' placeholder='YYYY' class='required'>
+          /
+      <input type='text' name='start-month' placeholder='MM' class='optional-num'>
+          /
+      <input type='text' name='start-day' placeholder='DD' class='optional-num'>
+    </div>
+    <div class='dates-fields'>
+      <span><h3>Start Time</h3></span>
+      <select name='start-hour' class='select-hour'>
+        <option value=''>HH</option>
+      </select>
+      <select name='start-minute' class='select-minute'>
+        <option value=''>MM</option>
+      </select>
+      <select name='start-second' class='select-second'>
+        <option value=''>SS</option>
+      </select>
+    </div>
+  </div>
+  <div class='dates'>
+    <div class='dates-fields'>
+      <span><h3>End Date</h3></span>
+      <input type='text' name='end-year' placeholder='YYYY' class='optional-num'>
+          /
+      <input type='text' name='end-month' placeholder='MM' class='optional-num'>
+          /
+      <input type='text' name='end-day' placeholder='DD' class='optional-num'>
+    </div>
+    <div class='dates-fields'>
+      <span><h3>End Time</h3></span>
+      <select name='end-hour' class='select-hour'>
+        <option value=''>HH</option>
+      </select>
+      <select name='end-minute' class='select-minute'>
+        <option value=''>MM</option>
+      </select>
+      <select name='end-second' class='select-second'>
+        <option value=''>SS</option>
+      </select>
+    </div>
+  </div>
+  <div class='display-date'>
+    <input type='text' name='display-date' placeholder='Display Date' class='optional'>
+  </div>
+  <div class='media-link'>
+    <input type='text' name='media' placeholder='Media Link' class='optional'>
+  </div>
+  <div class='media-credit'>
+    <input type='text' name='media-credit' placeholder='Media Credit' class='optional'>
+  </div>
+  <div class='media-caption'>
+    <input type='text' name='media-caption' placeholder='Media Caption' class='optional'>
+  </div>
+  <div class='media-thumb'>
+    <input type='text' name='media-thumb' placeholder='Media Thumbnail' class='optional'>
+  </div>
+  <div class='type'>
+    <input type='text' name='type' placeholder='Type' class='optional'>
+  </div>
+  <div class='group'>
+    <input type='text' name='group' placeholder='Group' class='optional'>
+  </div>
+  <div class='background'>
+    <input type='text' name='background' placeholder='Background' class='optional'>
+  </div>
+  <div id='submit-bar'>
+    <input type='submit' value='Save Changes' id='edit-event' class='edit-event-element'>
+    <input type='submit' value='Add Event' id='add-event' class='new-event-element'>
+  </div>
+  </form>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+  // grunt inline's way of doing things
+    <inline src='Sidebar.js'/>
+  </script>
+
+  </body>
+</html>
