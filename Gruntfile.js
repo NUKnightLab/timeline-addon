@@ -68,8 +68,8 @@ module.exports = function(grunt) {
     },
     inline: {
       dist: {
-        src: 'working/Sidebar.html',
-        dest: 'compiled/Sidebar.html'
+        src: 'working/Sidebar/Sidebar.html',
+        dest: 'compiled/Sidebar.html',
       }
     }
   });

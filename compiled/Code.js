@@ -33,26 +33,26 @@ function onEdit(e) {
  */
 function launchApp() {
   var ui;
-  
+
   if(checkSheet()){
     ui = HtmlService.createHtmlOutputFromFile('Sidebar')
       .setTitle('TimelineJS Helper')
-      .setSandboxMode(HtmlService.SandboxMode.IFRAME);  
+      .setSandboxMode(HtmlService.SandboxMode.IFRAME);
   } else {
     ui = HtmlService.createHtmlOutputFromFile('Init')
       .setTitle('TimelineJS Initializer')
-      .setSandboxMode(HtmlService.SandboxMode.IFRAME);    
+      .setSandboxMode(HtmlService.SandboxMode.IFRAME);
   }
-  
+
   SpreadsheetApp.getUi().showSidebar(ui);
 }
 
 function appendData(data) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheets()[0];
-  
+
   validateData(data);
-  
+
   sheet.appendRow(data);
 }
 
@@ -62,9 +62,9 @@ function editData(data) {
   var cell = sheet.getActiveCell();
 
   var range = sheet.getRange(cell.getRow(), 1, 1, 18);
- 
+
   validateData(data);
-  
+
   range.setValues([data]);
 }
 
@@ -79,32 +79,32 @@ function addTemplate() {
  var sheet = ss.getSheets()[0];
  var range = sheet.getRange("A1:R1");
  var template = [
-   [ 
-    "Year", 
-    "Month", 
-    "Day", 
-    "Time", 
-    "End Year", 
-    "End Month", 
-    "End Day", 
-    "End Time", 
-    "Display Date", 
-    "Headline", 
-    "Text", 
-    "Media", 
-    "Media Credit", 
-    "Media Caption", 
-    "Media Thumbnail", 
-    "Type", 
-    "Group", 
+   [
+    "Year",
+    "Month",
+    "Day",
+    "Time",
+    "End Year",
+    "End Month",
+    "End Day",
+    "End Time",
+    "Display Date",
+    "Headline",
+    "Text",
+    "Media",
+    "Media Credit",
+    "Media Caption",
+    "Media Thumbnail",
+    "Type",
+    "Group",
     "Background"
    ]
  ];
-  
+
   if (range.isBlank() == true) {
     range.setValues(template);
   }
-  
+
 }
 
 function checkSheet() {
@@ -127,11 +127,11 @@ function checkSheet() {
      values[0][13] !== "Media Caption" ||
      values[0][14] !== "Media Thumbnail" ||
      values[0][15] !== "Type" ||
-     values[0][16] !== "Group" || 
+     values[0][16] !== "Group" ||
      values[0][17] !== "Background") {
-    return false; 
+    return false;
   }
-  
+
   return true;
 }
 
@@ -139,33 +139,47 @@ function getRowValues(offset) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getActiveSheet();
   var cell = sheet.getActiveCell();
-  
+
   if(cell.getRow() == 2 && offset == -1) {
-    throw 'You\'re at the first row!'; 
+    throw 'You\'re at the first row!';
   }
-  
+
   if(cell.getRow() == sheet.getLastRow() && offset == 1) {
     throw 'You\'re on the last row!';
   }
-  
+
   var range = sheet.getRange(cell.getRow() + offset, 1, 1, 18);
   sheet.setActiveRange(range);
-  
+
   var data = [];
-  
+
   for (var i = 0; i < 18; i++) {
     data[i] = range.getCell(1, i + 1).getValue();
   }
-  
+
   return data;
 }
 
 function initSheet() {
   addTemplate();
-  
+
   var ui = HtmlService.createHtmlOutputFromFile('Sidebar')
     .setTitle('TimelineJS Helper')
-    .setSandboxMode(HtmlService.SandboxMode.IFRAME); 
-  
+    .setSandboxMode(HtmlService.SandboxMode.IFRAME);
+
   SpreadsheetApp.getUi().showSidebar(ui);
+}
+
+function getAllRows() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getActiveSheet();
+
+  var lastRow = sheet.getLastRow();
+  var headlines = [];
+
+  for (var i = 1; i < lastRow + 1; i++) {
+    headlines[i] = sheet.getRange(i, 1, 1, 18).getCell(1, 9).getValue();
+  }
+
+  return headlines;
 }
