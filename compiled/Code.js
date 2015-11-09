@@ -177,8 +177,8 @@ function getAllRows() {
   var lastRow = sheet.getLastRow();
   var headlines = [];
 
-  for (var i = 1; i < lastRow + 1; i++) {
-    headlines[i] = sheet.getRange(i, 1, 1, 18).getCell(1, 9).getValue();
+  for (var i = 3; i < lastRow + 1; i++) {
+    headlines[i] = sheet.getRange(i, 1, 1, 18).getCell(1, 10).getValue();
   }
 
   return headlines;

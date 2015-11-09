@@ -2,6 +2,8 @@
     $('.edit-event-element').css('display', 'none');
     $('#show-add-event').addClass('current-mode');
 
+    getAllRows();
+
     for(var i = 0; i < 24; i++) {
       if(i < 10) {
         i = ("0" + i).slice(-2);
