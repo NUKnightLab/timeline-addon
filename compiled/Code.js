@@ -135,6 +135,23 @@ function checkSheet() {
   return true;
 }
 
+function getArbitraryRowValues(row) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getActiveSheet();
+  var cell = sheet.getActiveCell();
+
+  var range = sheet.getRange(row + 2, 1, 1, 18);
+  sheet.setActiveRange(range);
+
+  var data = [];
+
+  for (var i = 0; i < 18; i++) {
+    data[i] = range.getCell(1, i + 1).getValue();
+  }
+
+  return data;
+}
+
 function getRowValues(offset) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getActiveSheet();
@@ -177,8 +194,8 @@ function getAllRows() {
   var lastRow = sheet.getLastRow();
   var headlines = [];
 
-  for (var i = 3; i < lastRow + 1; i++) {
-    headlines[i] = sheet.getRange(i, 1, 1, 18).getCell(1, 10).getValue();
+  for (var i = 2; i < lastRow + 1; i++) {
+    headlines[i - 2] = sheet.getRange(i, 1, 1, 18).getCell(1, 10).getValue();
   }
 
   return headlines;

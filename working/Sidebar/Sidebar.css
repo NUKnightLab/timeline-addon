@@ -101,3 +101,24 @@ input[type='text']:focus{
   border-bottom: 3px solid #9E9E9E;
   cursor: pointer;
 }
+
+.edit-select {
+  height: 100px;
+  overflow-y: scroll;
+  width: 80%;
+}
+
+.edit-select-list li{
+  list-style-type: none;
+  transition: all .2s ease;
+}
+
+.edit-select-list li:hover{
+  background-color: #E0E0E0;
+  cursor: pointer;
+}
+
+.edit-select-list li.selected{
+  background-color: #9E9E9E;
+  cursor: pointer;
+}
