@@ -110,25 +110,34 @@ input[type='text']:focus{
   cursor: pointer;
 }
 
+.row-select {
+  font-weight: bold;
+  margin-left: 10%;
+}
+
 .edit-select {
-  height: 100px;
+  height: 110px;
   overflow-y: scroll;
-  width: 80%;
+  width: 90%;
 }
 
 .edit-select-list li{
   list-style-type: none;
   transition: all .2s ease;
+  border-left: 4px solid #e0e0e0;
+  padding-left: 4px;
 }
 
 .edit-select-list li:hover{
   background-color: #E0E0E0;
   cursor: pointer;
+  border-left: 4px solid #9e9e9e;
 }
 
-.edit-select-list li .selected{
-  background-color: #9E9E9E;
+.edit-select-list li.selected{
+  background-color: #E0E0E0;
   cursor: pointer;
+  border-left: 4px solid #9e9e9e;
 }
 
     </style>
@@ -146,8 +155,8 @@ input[type='text']:focus{
     <div class='edit-select' id='edit-current'>Edit Current Row</div>
     <div class='edit-select' id='edit-next'>Edit Next Row</div>
   </div> -->
-  <h4>Row Select</h4>
-  <div class="edit-select">
+  <h4 class='row-select edit-event-element'>Row Select</h4>
+  <div class="edit-select edit-event-element">
     <ul class='edit-select-list'>
 
     </ul>
@@ -313,6 +322,9 @@ input[type='text']:focus{
 
   $(document).on('click', '.edit-select-row', function() {
     getArbitraryRowValues(parseInt($(this).attr('id').substring(4)));
+    $('.edit-select-list').children('.edit-select-row').each(function(i) {
+      $(this).removeClass('selected');
+    })
     $(this).addClass('selected');
   });
 
@@ -381,10 +393,10 @@ input[type='text']:focus{
       var headline = $('input[name=headline]').val();
       var text = $('input[name=text]').val();
       var display = $('input[name=display-date]').val();
-      var link = $('input[name=media-link]').val();
+      var media = $('input[name=media]').val();
       var credit = $('input[name=media-credit]').val();
       var caption = $('input[name=media-caption]').val();
-      var thumb = $('input[name=media-thumbnail]').val();
+      var thumb = $('input[name=media-thumb]').val();
       var type = $('input[name=type]').val();
       var group = $('input[name=group]').val();
       var background = $('input[name=backgrounf]').val();
@@ -400,7 +412,7 @@ input[type='text']:focus{
               displayDate,
               headline,
               text,
-              link,
+              media,
               credit,
               caption,
               thumb,

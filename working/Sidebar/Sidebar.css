@@ -102,23 +102,33 @@ input[type='text']:focus{
   cursor: pointer;
 }
 
+.row-select {
+  font-weight: bold;
+  margin-left: 10%;
+  margin-bottom: 0;
+}
+
 .edit-select {
-  height: 100px;
+  height: 110px;
   overflow-y: scroll;
-  width: 80%;
+  width: 90%;
 }
 
 .edit-select-list li{
   list-style-type: none;
   transition: all .2s ease;
+  border-left: 4px solid #e0e0e0;
+  padding-left: 4px;
 }
 
 .edit-select-list li:hover{
   background-color: #E0E0E0;
   cursor: pointer;
+  border-left: 4px solid #9e9e9e;
 }
 
 .edit-select-list li.selected{
-  background-color: #9E9E9E;
+  background-color: #E0E0E0;
   cursor: pointer;
+  border-left: 4px solid #9e9e9e;
 }

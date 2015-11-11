@@ -76,6 +76,9 @@
 
   $(document).on('click', '.edit-select-row', function() {
     getArbitraryRowValues(parseInt($(this).attr('id').substring(4)));
+    $('.edit-select-list').children('.edit-select-row').each(function(i) {
+      $(this).removeClass('selected');
+    })
     $(this).addClass('selected');
   });
 
@@ -144,10 +147,10 @@
       var headline = $('input[name=headline]').val();
       var text = $('input[name=text]').val();
       var display = $('input[name=display-date]').val();
-      var link = $('input[name=media-link]').val();
+      var media = $('input[name=media]').val();
       var credit = $('input[name=media-credit]').val();
       var caption = $('input[name=media-caption]').val();
-      var thumb = $('input[name=media-thumbnail]').val();
+      var thumb = $('input[name=media-thumb]').val();
       var type = $('input[name=type]').val();
       var group = $('input[name=group]').val();
       var background = $('input[name=backgrounf]').val();
@@ -163,7 +166,7 @@
               displayDate,
               headline,
               text,
-              link,
+              media,
               credit,
               caption,
               thumb,
