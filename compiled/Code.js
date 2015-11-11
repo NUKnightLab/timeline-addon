@@ -135,37 +135,12 @@ function checkSheet() {
   return true;
 }
 
-function getArbitraryRowValues(row) {
+function getRowData(row) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getActiveSheet();
   var cell = sheet.getActiveCell();
 
   var range = sheet.getRange(row + 2, 1, 1, 18);
-  sheet.setActiveRange(range);
-
-  var data = [];
-
-  for (var i = 0; i < 18; i++) {
-    data[i] = range.getCell(1, i + 1).getValue();
-  }
-
-  return data;
-}
-
-function getRowValues(offset) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getActiveSheet();
-  var cell = sheet.getActiveCell();
-
-  if(cell.getRow() == 2 && offset == -1) {
-    throw 'You\'re at the first row!';
-  }
-
-  if(cell.getRow() == sheet.getLastRow() && offset == 1) {
-    throw 'You\'re on the last row!';
-  }
-
-  var range = sheet.getRange(cell.getRow() + offset, 1, 1, 18);
   sheet.setActiveRange(range);
 
   var data = [];

@@ -36,21 +36,9 @@
       $(this).css("border-bottom-color", checkOptionalNum($(this)));
     });
 
-    $('#add-event').click(addData);
-
-    $('#edit-current').click(function(event) {
-      getRowValues(0);
-      event.stopPropagation();
-    });
-
-    $('#edit-previous').click(function(event) {
-      getRowValues(-1);
-      event.stopPropagation();
-    });
-
-    $('#edit-next').click(function(event) {
-      getRowValues(1);
-      event.stopPropagation();
+    $('#add-event').click(function() {
+      addData();
+      getAllRows();
     });
 
     $('#edit-event').click(pushEdits);
@@ -75,7 +63,7 @@
   });
 
   $(document).on('click', '.edit-select-row', function() {
-    getArbitraryRowValues(parseInt($(this).attr('id').substring(4)));
+    getRowData(parseInt($(this).attr('id').substring(4)));
     $('.edit-select-list').children('.edit-select-row').each(function(i) {
       $(this).removeClass('selected');
     })
@@ -194,7 +182,7 @@
           .appendData(getFields());
   }
 
-  function getArbitraryRowValues(row) {
+  function getRowData(row) {
     actualRow = row + 2
     console.log('getting row ' + actualRow);
 
@@ -229,42 +217,7 @@
         function(msg, element) {
           showError(msg, $('#submit-bar'));
       })
-      .getArbitraryRowValues(row);
-  }
-
-  function getRowValues(offset) {
-    google.script.run
-      .withSuccessHandler(function(data) {
-        $("input[name=start-year]").val(data[0]);
-        $("input[name=start-month]").val(data[1]);
-        $("input[name=start-day]").val(data[2]);
-        $("select[name=start-hour]").val(data[3].substring(0, 2));
-        $("select[name=start-minute]").val(data[3].substring(3, 5));
-        $("select[name=start-second]").val(data[3].substring(6, 8));
-
-        $("input[name=end-year]").val(data[4]);
-        $("input[name=end-month]").val(data[5]);
-        $("input[name=end-day]").val(data[6]);
-        $("select[name=end-hour]").val(data[7].substring(0, 2));
-        $("select[name=end-minute]").val(data[7].substring(3, 5));
-        $("select[name=end-second]").val(data[7].substring(6, 8));
-
-        $("input[name=display-date]").val(data[8]);
-        $("input[name=headline]").val(data[9]);
-        $("input[name=text]").val(data[10]);
-        $("input[name=media]").val(data[11]);
-        $("input[name=media-credit]").val(data[12]);
-        $("input[name=media-caption]").val(data[13]);
-        $("input[name=media-thumb]").val(data[14]);
-        $("input[name=type]").val(data[15]);
-        $("input[name=group]").val(data[16]);
-        $("input[name=background]").val(data[17]);
-      })
-      .withFailureHandler(
-        function(msg, element) {
-          showError(msg, $('#submit-bar'));
-      })
-      .getRowValues(offset);
+      .getRowData(row);
   }
 
   function pushEdits() {

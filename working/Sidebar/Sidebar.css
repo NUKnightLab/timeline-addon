@@ -68,21 +68,10 @@ input[type='text']:focus{
   height: 2em;
 }
 
-#submit-bar,
-#edit-bar{
+#submit-bar{
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
-}
-
-#edit-bar .edit-select {
-  display: inline-block;
-  width: 30%;
-  background-color: #c9c9c9;
-}
-
-#edit-bar .edit-select:hover {
-  cursor: pointer;
 }
 
 .edit-modes div {
