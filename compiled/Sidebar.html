@@ -236,7 +236,7 @@ input[type='text']:focus{
     getAllRows();
 
     for(var i = 0; i < 24; i++) {
-      if(i < 10) {
+      if (i < 10) {
         i = ("0" + i).slice(-2);
       }
 
@@ -244,7 +244,7 @@ input[type='text']:focus{
     }
 
     for(var i = 0; i < 60; i++) {
-      if(i < 10) {
+      if (i < 10) {
         i = ("0" + i).slice(-2);
       }
 
@@ -267,10 +267,13 @@ input[type='text']:focus{
       $(this).css("border-bottom-color", checkOptionalNum($(this)));
     });
 
-    $('#add-event').click(function() {
-      addData();
-      getAllRows();
-    });
+    $('#add-event').click(addData);
+
+    // $('#add-event').click(function(event) {
+    //   event.stopPropagation();
+    //   addData();
+    //   getAllRows();
+    // });
 
     $('#edit-event').click(pushEdits);
 

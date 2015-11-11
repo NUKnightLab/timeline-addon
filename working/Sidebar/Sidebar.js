@@ -5,7 +5,7 @@
     getAllRows();
 
     for(var i = 0; i < 24; i++) {
-      if(i < 10) {
+      if (i < 10) {
         i = ("0" + i).slice(-2);
       }
 
@@ -13,7 +13,7 @@
     }
 
     for(var i = 0; i < 60; i++) {
-      if(i < 10) {
+      if (i < 10) {
         i = ("0" + i).slice(-2);
       }
 
@@ -36,7 +36,8 @@
       $(this).css("border-bottom-color", checkOptionalNum($(this)));
     });
 
-    $('#add-event').click(function() {
+    $('#add-event').click(function(event) {
+      event.stopPropagation();
       addData();
       getAllRows();
     });
