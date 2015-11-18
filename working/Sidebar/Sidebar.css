@@ -91,6 +91,11 @@ input[type='text']:focus{
   cursor: pointer;
 }
 
+.refresh-rows {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .row-select {
   font-weight: bold;
   margin-left: 10%;

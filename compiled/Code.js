@@ -24,9 +24,21 @@ function onInstall(e) {
   onOpen(e);
 }
 
-function onEdit(e) {
-  launchApp(e);
+function createEditTrigger() {
+  var ss = SpreadsheetApp.getActive();
+  ScriptApp.newTrigger('afterEdit')
+    .forSpreadsheet(ss)
+    .onEdit()
+    .create();
 }
+
+function afterEdit() {
+  Logger.log('edit trigger called');
+}
+
+// function onEdit(e) {
+// // simple trigger that must be bound to the spreadsheet
+// }
 
 /**
  * Opens a sidebar in the document containing the add-on's user interface.

@@ -71,6 +71,10 @@
     $(this).addClass('selected');
   });
 
+  $(document).on('click', '#refresh-rows', function() {
+    getAllRows();
+  });
+
   function checkRequired(element) {
     if (element.val() == "") {
       return "#c9c9c9";
