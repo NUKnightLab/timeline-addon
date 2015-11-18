@@ -267,13 +267,11 @@ input[type='text']:focus{
       $(this).css("border-bottom-color", checkOptionalNum($(this)));
     });
 
-    $('#add-event').click(addData);
-
-    // $('#add-event').click(function(event) {
-    //   event.stopPropagation();
-    //   addData();
-    //   getAllRows();
-    // });
+    $('#add-event').click(function(event) {
+      event.stopPropagation();
+      addData();
+      getAllRows();
+    });
 
     $('#edit-event').click(pushEdits);
 

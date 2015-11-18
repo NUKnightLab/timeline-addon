@@ -25,7 +25,7 @@ function onInstall(e) {
 }
 
 function onEdit(e) {
-  SpreadsheetApp.getActiveSpreadsheet()
+  launchApp(e);
 }
 
 /**
