@@ -1,3 +1,26 @@
+var template = [
+  [
+   "Year",
+   "Month",
+   "Day",
+   "Time",
+   "End Year",
+   "End Month",
+   "End Day",
+   "End Time",
+   "Display Date",
+   "Headline",
+   "Text",
+   "Media",
+   "Media Credit",
+   "Media Caption",
+   "Media Thumbnail",
+   "Type",
+   "Group",
+   "Background"
+  ]
+];
+
 /**
  * Creates a menu entry in the Google Sheets UI when the document is opened.
  *
@@ -26,14 +49,18 @@ function onInstall(e) {
 
 function createEditTrigger() {
   var ss = SpreadsheetApp.getActive();
-  ScriptApp.newTrigger('afterEdit')
+  ScriptApp.newTrigger('uponEdit')
     .forSpreadsheet(ss)
     .onEdit()
     .create();
 }
 
-function afterEdit() {
-  Logger.log('edit trigger called');
+// installable trigger
+function uponEdit() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getActiveSheet();
+
+  sheet.appendRow([['asdf']]);
 }
 
 // function onEdit(e) {
@@ -61,7 +88,7 @@ function launchApp() {
 
 function appendData(data) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheets()[0];
+  var sheet = ss.getActiveSheet();
 
   validateData(data);
 
@@ -90,28 +117,6 @@ function addTemplate() {
  var ss = SpreadsheetApp.getActiveSpreadsheet();
  var sheet = ss.getSheets()[0];
  var range = sheet.getRange("A1:R1");
- var template = [
-   [
-    "Year",
-    "Month",
-    "Day",
-    "Time",
-    "End Year",
-    "End Month",
-    "End Day",
-    "End Time",
-    "Display Date",
-    "Headline",
-    "Text",
-    "Media",
-    "Media Credit",
-    "Media Caption",
-    "Media Thumbnail",
-    "Type",
-    "Group",
-    "Background"
-   ]
- ];
 
   if (range.isBlank() == true) {
     range.setValues(template);
@@ -123,28 +128,7 @@ function checkSheet() {
   var ss = SpreadsheetApp.getActiveSheet();
   var values = ss.getRange(1, 1, 1, 18).getValues();
 
-  if(values[0][0] !== "Year" ||
-     values[0][1] !== "Month" ||
-     values[0][2] !== "Day" ||
-     values[0][3] !== "Time" ||
-     values[0][4] !== "End Year" ||
-     values[0][5] !== "End Month" ||
-     values[0][6] !== "End Day" ||
-     values[0][7] !== "End Time" ||
-     values[0][8] !== "Display Date" ||
-     values[0][9] !== "Headline" ||
-     values[0][10] !== "Text" ||
-     values[0][11] !== "Media" ||
-     values[0][12] !== "Media Credit" ||
-     values[0][13] !== "Media Caption" ||
-     values[0][14] !== "Media Thumbnail" ||
-     values[0][15] !== "Type" ||
-     values[0][16] !== "Group" ||
-     values[0][17] !== "Background") {
-    return false;
-  }
-
-  return true;
+  return values == template;
 }
 
 function getRowData(row) {
