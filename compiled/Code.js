@@ -83,6 +83,9 @@ function launchApp() {
       .setSandboxMode(HtmlService.SandboxMode.IFRAME);
   }
 
+  // addon must be deployed for this to work
+  // createEditTrigger();
+
   SpreadsheetApp.getUi().showSidebar(ui);
 }
 
@@ -91,7 +94,6 @@ function appendData(data) {
   var sheet = ss.getActiveSheet();
 
   validateData(data);
-
   sheet.appendRow(data);
 }
 

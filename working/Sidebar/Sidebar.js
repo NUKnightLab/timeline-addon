@@ -1,3 +1,7 @@
+var gray = "#c9c9c9",
+    green = "#00C853",
+    red = "#F44336";
+
   $(document).ready(function() {
     $('.edit-event-element').css('display', 'none');
     $('#show-add-event').addClass('current-mode');
@@ -60,6 +64,7 @@
       $('#show-add-event').removeClass('current-mode');
 
       clearFields();
+      getAllRows();
     });
   });
 
@@ -78,30 +83,30 @@
 
   function checkRequired(element) {
     if (element.val() == "") {
-      return "#c9c9c9";
+      return gray;
     }
 
     if (Number.isInteger(parseInt(element.val()))) {
-      return "green";
+      return green;
     }
 
-    return "red";
+    return red;
   }
 
   function checkOptional(element) {
     if (element.val() == "") {
-      return "#c9c9c9";
+      return gray;
     }
 
-    return "green";
+    return green;
   }
 
   function checkOptionalNum(element) {
     if (element.val() == "") {
-      return "#c9c9c9";
+      return gray;
     }
 
-    return Number.isInteger(parseInt(element.val())) ? "green" : "red";
+    return Number.isInteger(parseInt(element.val())) ? green : red;
   }
 
   function getFields() {
@@ -248,7 +253,7 @@
 
   function clearFields() {
     $('form').find('input:text').val('');
-    $('form').find('input:text').css('border-bottom', 'solid 2px #c9c9c9');
+    $('form').find('input:text').css('border-bottom', 'solid 2px ' + gray);
 
     $('.select-hour').val('');
     $('.select-minute').val('');

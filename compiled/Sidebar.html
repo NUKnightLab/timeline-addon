@@ -148,7 +148,7 @@ input[type='text']:focus{
 
   <form>
     <div class="refresh-rows">
-      <input type='submit' value='Refresh Rows' id='refresh-rows' class='edit-event-element'>
+      <input type='submit' value='Refresh Row Select' id='refresh-rows' class='edit-event-element'>
     </div>
     <h4 class='row-select edit-event-element'>Row Select</h4>
     <div class="edit-select edit-event-element">
@@ -242,7 +242,11 @@ input[type='text']:focus{
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>
     // grunt inline's way of doing things
-      $(document).ready(function() {
+    var gray = "#c9c9c9",
+    green = "#00C853",
+    red = "#F44336";
+
+  $(document).ready(function() {
     $('.edit-event-element').css('display', 'none');
     $('#show-add-event').addClass('current-mode');
 
@@ -304,6 +308,7 @@ input[type='text']:focus{
       $('#show-add-event').removeClass('current-mode');
 
       clearFields();
+      getAllRows();
     });
   });
 
@@ -322,30 +327,30 @@ input[type='text']:focus{
 
   function checkRequired(element) {
     if (element.val() == "") {
-      return "#c9c9c9";
+      return gray;
     }
 
     if (Number.isInteger(parseInt(element.val()))) {
-      return "green";
+      return green;
     }
 
-    return "red";
+    return red;
   }
 
   function checkOptional(element) {
     if (element.val() == "") {
-      return "#c9c9c9";
+      return gray;
     }
 
-    return "green";
+    return green;
   }
 
   function checkOptionalNum(element) {
     if (element.val() == "") {
-      return "#c9c9c9";
+      return gray;
     }
 
-    return Number.isInteger(parseInt(element.val())) ? "green" : "red";
+    return Number.isInteger(parseInt(element.val())) ? green : red;
   }
 
   function getFields() {
@@ -492,7 +497,7 @@ input[type='text']:focus{
 
   function clearFields() {
     $('form').find('input:text').val('');
-    $('form').find('input:text').css('border-bottom', 'solid 2px #c9c9c9');
+    $('form').find('input:text').css('border-bottom', 'solid 2px ' + gray);
 
     $('.select-hour').val('');
     $('.select-minute').val('');
