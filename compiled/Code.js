@@ -60,7 +60,7 @@ function uponEdit() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getActiveSheet();
 
-  sheet.appendRow([['asdf']]);
+  sheet.appendRow(template);
 }
 
 // function onEdit(e) {
@@ -128,7 +128,13 @@ function checkSheet() {
   var ss = SpreadsheetApp.getActiveSheet();
   var values = ss.getRange(1, 1, 1, 18).getValues();
 
-  return values == template;
+  for (var i = 0; i < 18; i++) {
+    if (values[0][i] !== template[0][i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 function getRowData(row) {

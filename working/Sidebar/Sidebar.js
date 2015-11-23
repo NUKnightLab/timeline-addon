@@ -72,6 +72,7 @@
   });
 
   $(document).on('click', '#refresh-rows', function() {
+    removeOldRows();
     getAllRows();
   });
 
@@ -253,6 +254,10 @@
   function showError(msg, element) {
     var div = $('<div id="error" class="error">' + msg + '</div>');
     $(element).after(div);
+  }
+
+  function removeOldRows() {
+    $('li').remove('.edit-select-row');
   }
 
   function getAllRows() {
