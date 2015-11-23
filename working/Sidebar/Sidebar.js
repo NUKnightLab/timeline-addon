@@ -249,6 +249,10 @@
   function clearFields() {
     $('form').find('input:text').val('');
     $('form').find('input:text').css('border-bottom', 'solid 2px #c9c9c9');
+
+    $('.select-hour').val('');
+    $('.select-minute').val('');
+    $('.select-second').val('');
   }
 
   function showError(msg, element) {
