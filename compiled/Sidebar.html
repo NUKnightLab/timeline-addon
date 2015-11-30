@@ -240,6 +240,7 @@ input[type='text']:focus{
   <script>
     // grunt inline's way of doing things
     var gray = "#c9c9c9",
+    darkgray = '#969696',
     green = "#00C853",
     red = "#F44336";
 
@@ -247,6 +248,7 @@ input[type='text']:focus{
     $('.edit-event-element').css('display', 'none');
     $('#show-add-event').addClass('current-mode');
 
+    // refresh row list automatically
     setInterval(function() {
       getAllRows();
     }, 1000);
@@ -283,8 +285,7 @@ input[type='text']:focus{
       $(this).css("border-bottom-color", checkOptionalNum($(this)));
     });
 
-    $('#add-event').click(function(event) {
-      event.stopPropagation();
+    $('#add-event').click(function() {
       addData();
       getAllRows();
     });
@@ -312,6 +313,7 @@ input[type='text']:focus{
   });
 
   $(document).on('click', '.edit-select-row', function() {
+    clearFields();
     getRowData(parseInt($(this).attr('id').substring(4)));
     $('.edit-select-list').children('.edit-select-row').each(function(i) {
       $(this).removeClass('selected');
@@ -347,10 +349,16 @@ input[type='text']:focus{
     return Number.isInteger(parseInt(element.val())) ? green : red;
   }
 
+  function resetInputColors() {
+    $('form').find('.required').css('color', '#000');
+    $('form').find('.optional').css('color', '#000');
+    $('form').find('.optional-num').css('color', '#000');
+  }
+
   function getFields() {
-      var startYear = Number.isInteger(parseInt($('input[name=start-year]').val())) ? $('input[name=start-year]').val() : "";
-      var startMonth = $('input[name=start-month]').val();
-      var startDay = $('input[name=start-day]').val();
+      var startYear = Number.isInteger(parseInt($('input[name=start-year]').val())) ? $('input[name=start-year]').val() : "",
+          startMonth = $('input[name=start-month]').val(),
+          startDay = $('input[name=start-day]').val();
 
       var startTime = "";
 
@@ -363,9 +371,9 @@ input[type='text']:focus{
                       $('select[name=start-second]').val();
           }
 
-      var endYear = $('input[name=end-year]').val();
-      var endMonth = $('input[name=end-month]').val();
-      var endDay = $('input[name=end-day]').val();
+      var endYear = $('input[name=end-year]').val(),
+          endMonth = $('input[name=end-month]').val(),
+          endDay = $('input[name=end-day]').val();
 
       var endTime = "";
 
@@ -379,18 +387,17 @@ input[type='text']:focus{
           }
 
 
-      var displayDate = $('input[name=display-date]').val();
-
-      var headline = $('input[name=headline]').val();
-      var text = $('input[name=text]').val();
-      var display = $('input[name=display-date]').val();
-      var media = $('input[name=media]').val();
-      var credit = $('input[name=media-credit]').val();
-      var caption = $('input[name=media-caption]').val();
-      var thumb = $('input[name=media-thumb]').val();
-      var type = $('input[name=type]').val();
-      var group = $('input[name=group]').val();
-      var background = $('input[name=backgrounf]').val();
+      var displayDate = $('input[name=display-date]').val(),
+          headline = $('input[name=headline]').val(),
+          text = $('input[name=text]').val(),
+          display = $('input[name=display-date]').val(),
+          media = $('input[name=media]').val(),
+          credit = $('input[name=media-credit]').val(),
+          caption = $('input[name=media-caption]').val(),
+          thumb = $('input[name=media-thumb]').val(),
+          type = $('input[name=type]').val(),
+          group = $('input[name=group]').val(),
+          background = $('input[name=backgrounf]').val();
 
       return [startYear,
               startMonth,
@@ -490,6 +497,7 @@ input[type='text']:focus{
   }
 
   function clearFields() {
+    resetInputColors();
     $('form').find('input:text').val('');
     $('form').find('input:text').css('border-bottom', 'solid 2px ' + gray);
 
