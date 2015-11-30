@@ -77,7 +77,6 @@ var gray = "#c9c9c9",
   });
 
   $(document).on('click', '#refresh-rows', function() {
-    removeOldRows();
     getAllRows();
   });
 
@@ -195,7 +194,7 @@ var gray = "#c9c9c9",
 
   function getRowData(row) {
     actualRow = row + 2
-    console.log('getting row ' + actualRow);
+    // console.log('getting row ' + actualRow);
 
     google.script.run
       .withSuccessHandler(function(data) {
@@ -228,7 +227,7 @@ var gray = "#c9c9c9",
         function(msg, element) {
           showError(msg, $('#submit-bar'));
       })
-      .getRowData(row);
+      .getRowData(actualRow);
   }
 
   function pushEdits() {
@@ -270,6 +269,8 @@ var gray = "#c9c9c9",
   }
 
   function getAllRows() {
+    removeOldRows();
+
     google.script.run
       .withSuccessHandler(
         function(rows) {

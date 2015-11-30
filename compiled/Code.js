@@ -63,9 +63,9 @@ function uponEdit() {
   sheet.appendRow(template);
 }
 
-// function onEdit(e) {
-// // simple trigger that must be bound to the spreadsheet
-// }
+function onEdit(e) {
+// simple trigger that must be bound to the spreadsheet
+}
 
 /**
  * Opens a sidebar in the document containing the add-on's user interface.
@@ -74,11 +74,13 @@ function launchApp() {
   var ui;
 
   if(checkSheet()){
-    ui = HtmlService.createHtmlOutputFromFile('Sidebar')
+    ui = HtmlService
+      .createHtmlOutputFromFile('Sidebar')
       .setTitle('TimelineJS Helper')
       .setSandboxMode(HtmlService.SandboxMode.IFRAME);
   } else {
-    ui = HtmlService.createHtmlOutputFromFile('Init')
+    ui = HtmlService
+      .createHtmlOutputFromFile('Init')
       .setTitle('TimelineJS Initializer')
       .setSandboxMode(HtmlService.SandboxMode.IFRAME);
   }
@@ -110,7 +112,7 @@ function editData(data) {
 }
 
 function validateData(data) {
-  if(data[0] == "") {
+  if (data[0] == "") {
     throw 'Invalid start year.';
   }
 }
@@ -144,7 +146,7 @@ function getRowData(row) {
   var sheet = ss.getActiveSheet();
   var cell = sheet.getActiveCell();
 
-  var range = sheet.getRange(row + 2, 1, 1, 18);
+  var range = sheet.getRange(row, 1, 1, 18);
   sheet.setActiveRange(range);
 
   var data = [];

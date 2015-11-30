@@ -141,6 +141,7 @@ input[type='text']:focus{
 </head>
 
 <body>
+  <h2>test</h2>
   <div class='edit-modes'>
     <div id='show-add-event'>Create New Event</div>
     <div id='show-edit-event'>Edit Existing Event</div>
@@ -321,7 +322,6 @@ input[type='text']:focus{
   });
 
   $(document).on('click', '#refresh-rows', function() {
-    removeOldRows();
     getAllRows();
   });
 
@@ -439,7 +439,7 @@ input[type='text']:focus{
 
   function getRowData(row) {
     actualRow = row + 2
-    console.log('getting row ' + actualRow);
+    // console.log('getting row ' + actualRow);
 
     google.script.run
       .withSuccessHandler(function(data) {
@@ -472,7 +472,7 @@ input[type='text']:focus{
         function(msg, element) {
           showError(msg, $('#submit-bar'));
       })
-      .getRowData(row);
+      .getRowData(actualRow);
   }
 
   function pushEdits() {
@@ -514,6 +514,8 @@ input[type='text']:focus{
   }
 
   function getAllRows() {
+    removeOldRows();
+
     google.script.run
       .withSuccessHandler(
         function(rows) {
