@@ -141,16 +141,12 @@ input[type='text']:focus{
 </head>
 
 <body>
-  <h2>test</h2>
   <div class='edit-modes'>
     <div id='show-add-event'>Create New Event</div>
     <div id='show-edit-event'>Edit Existing Event</div>
   </div>
 
   <form>
-    <div class="refresh-rows">
-      <input type='submit' value='Refresh Row Select' id='refresh-rows' class='edit-event-element'>
-    </div>
     <h4 class='row-select edit-event-element'>Row Select</h4>
     <div class="edit-select edit-event-element">
       <ul class='edit-select-list'>
@@ -251,7 +247,9 @@ input[type='text']:focus{
     $('.edit-event-element').css('display', 'none');
     $('#show-add-event').addClass('current-mode');
 
-    getAllRows();
+    setInterval(function() {
+      getAllRows();
+    }, 1000);
 
     for(var i = 0; i < 24; i++) {
       if (i < 10) {
@@ -319,10 +317,6 @@ input[type='text']:focus{
       $(this).removeClass('selected');
     })
     $(this).addClass('selected');
-  });
-
-  $(document).on('click', '#refresh-rows', function() {
-    getAllRows();
   });
 
   function checkRequired(element) {
@@ -514,11 +508,11 @@ input[type='text']:focus{
   }
 
   function getAllRows() {
-    removeOldRows();
-
     google.script.run
       .withSuccessHandler(
         function(rows) {
+          removeOldRows();
+
           for (var i = 0; i < rows.length; i++) {
             $('.edit-select-list').append('<li class="edit-select-row" id="row-' + i + '">' + rows[i] + '</li>');
           }

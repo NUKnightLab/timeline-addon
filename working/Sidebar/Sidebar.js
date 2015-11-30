@@ -6,7 +6,9 @@ var gray = "#c9c9c9",
     $('.edit-event-element').css('display', 'none');
     $('#show-add-event').addClass('current-mode');
 
-    getAllRows();
+    setInterval(function() {
+      getAllRows();
+    }, 1000);
 
     for(var i = 0; i < 24; i++) {
       if (i < 10) {
@@ -74,10 +76,6 @@ var gray = "#c9c9c9",
       $(this).removeClass('selected');
     })
     $(this).addClass('selected');
-  });
-
-  $(document).on('click', '#refresh-rows', function() {
-    getAllRows();
   });
 
   function checkRequired(element) {
@@ -269,11 +267,11 @@ var gray = "#c9c9c9",
   }
 
   function getAllRows() {
-    removeOldRows();
-
     google.script.run
       .withSuccessHandler(
         function(rows) {
+          removeOldRows();
+
           for (var i = 0; i < rows.length; i++) {
             $('.edit-select-list').append('<li class="edit-select-row" id="row-' + i + '">' + rows[i] + '</li>');
           }
