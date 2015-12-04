@@ -6,9 +6,6 @@ var gray = "#c9c9c9",
 var currentRowID;
 
   $(document).ready(function() {
-    $('.edit-event-element').css('display', 'none');
-    $('#show-add-event').addClass('current-mode');
-
     // refresh row list automatically
     setInterval(function() {
       getAllRows();
@@ -85,6 +82,10 @@ var currentRowID;
     })
     currentRowID = $(this).attr('id');
     $(this).addClass('selected');
+  });
+
+  $(document).on('click', '#add-row', function() {
+    startNewRow();
   });
 
   function checkRequired(element) {
@@ -243,18 +244,14 @@ var currentRowID;
   }
 
   function pushEdits() {
-      this.disabled = true;
-
       google.script.run
           .withSuccessHandler(
             function(msg, element) {
               $('#submit-bar').val("New row added");
-              element.disabled = false;
             })
           .withFailureHandler(
             function(msg, element) {
               showError(msg, $('#submit-bar'));
-              element.disabled = false;
             })
           .withUserObject(this)
           .editData(getFields());
@@ -277,6 +274,7 @@ var currentRowID;
 
   function removeOldRows() {
     $('li').remove('.edit-select-row');
+    $('li').remove('#add-row');
   }
 
   function getAllRows() {
@@ -288,12 +286,27 @@ var currentRowID;
           for (var i = 0; i < rows.length; i++) {
             $('.edit-select-list').append('<li class="edit-select-row" id="row-' + i + '">' + rows[i] + '</li>');
           }
+
+          $('.edit-select-list').append('<li id="add-row">+ Add Row</li>');
         })
       .withFailureHandler(
         function(msg, element) {
           showError(msg, $('#submit-bar'));
-          element.disabled = false;
         })
       .withUserObject(this)
       .getAllRows();
+  }
+
+  function startNewRow() {
+    google.script.run
+      .withSuccessHandler(
+        function(msg, element) {
+
+        })
+      .withFailureHandler(
+        function(msg, element) {
+
+        })
+      .withUserObject(this)
+      .startNewRow();
   }

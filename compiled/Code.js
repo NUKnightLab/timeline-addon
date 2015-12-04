@@ -72,6 +72,9 @@ function onEdit(e) {
  */
 function launchApp() {
   var ui;
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getActiveSheet();
+  var range = sheet.getRange('A2:R2')
 
   if(checkSheet()){
     ui = HtmlService
@@ -89,6 +92,18 @@ function launchApp() {
   // createEditTrigger();
 
   SpreadsheetApp.getUi().showSidebar(ui);
+  sheet.setActiveRange(range);
+}
+
+function startNewRow(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getActiveSheet();
+  var lastRow = sheet.getLastRow();
+  var nextRow = lastRow + 1;
+
+  var range = "A" + nextRow + ":R" + nextRow;
+  range = sheet.getRange(range);
+  sheet.setActiveRange(range);
 }
 
 function appendData(data) {

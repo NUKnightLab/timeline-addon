@@ -145,11 +145,6 @@ input[type='text']:focus{
 </head>
 
 <body>
-  <div class='edit-modes'>
-    <div id='show-add-event'>Create New Event</div>
-    <div id='show-edit-event'>Edit Existing Event</div>
-  </div>
-
   <form>
     <h4 class='row-select edit-event-element'>Row Select</h4>
     <div class="edit-select edit-event-element">
@@ -235,7 +230,6 @@ input[type='text']:focus{
       <input type='text' name='background' placeholder='Background' class='optional'>
     </div>
     <div id='submit-bar'>
-      <input type='submit' value='Save Changes' id='edit-event' class='edit-event-element'>
       <input type='submit' value='Add Event' id='add-event' class='new-event-element'>
     </div>
   </form>
@@ -251,9 +245,6 @@ input[type='text']:focus{
 var currentRowID;
 
   $(document).ready(function() {
-    $('.edit-event-element').css('display', 'none');
-    $('#show-add-event').addClass('current-mode');
-
     // refresh row list automatically
     setInterval(function() {
       getAllRows();
@@ -278,8 +269,6 @@ var currentRowID;
       $('.select-second').append('<option value="' + i + '">' + i + '</option>');
     }
 
-    $('input').change(pushEdits);
-
     $(".required").change(function() {
       $(this).css("color", checkRequired($(this)));
       $(this).css("border-bottom-color", checkRequired($(this)));
@@ -301,6 +290,8 @@ var currentRowID;
     });
 
     $('#edit-event').click(pushEdits);
+    $('input').change(pushEdits);
+    $('select').change(pushEdits);
 
     $('#show-add-event').click(function() {
       $('.new-event-element').css('display', 'inline-block');
@@ -330,6 +321,10 @@ var currentRowID;
     })
     currentRowID = $(this).attr('id');
     $(this).addClass('selected');
+  });
+
+  $(document).on('click', '#add-row', function() {
+    startNewRow();
   });
 
   function checkRequired(element) {
@@ -488,18 +483,14 @@ var currentRowID;
   }
 
   function pushEdits() {
-      this.disabled = true;
-
       google.script.run
           .withSuccessHandler(
             function(msg, element) {
               $('#submit-bar').val("New row added");
-              element.disabled = false;
             })
           .withFailureHandler(
             function(msg, element) {
               showError(msg, $('#submit-bar'));
-              element.disabled = false;
             })
           .withUserObject(this)
           .editData(getFields());
@@ -522,6 +513,7 @@ var currentRowID;
 
   function removeOldRows() {
     $('li').remove('.edit-select-row');
+    $('li').remove('#add-row');
   }
 
   function getAllRows() {
@@ -533,14 +525,31 @@ var currentRowID;
           for (var i = 0; i < rows.length; i++) {
             $('.edit-select-list').append('<li class="edit-select-row" id="row-' + i + '">' + rows[i] + '</li>');
           }
+
+          $('.edit-select-list').append('<li id="add-row">+ Add Row</li>');
         })
       .withFailureHandler(
         function(msg, element) {
           showError(msg, $('#submit-bar'));
-          element.disabled = false;
         })
       .withUserObject(this)
       .getAllRows();
+  }
+
+  function startNewRow() {
+    $('#add-row').css('background-color', 'blue');
+    google.script.run
+      .withSuccessHandler(
+        function(msg, element) {
+          $('#add-row').css('background-color', 'green');
+        })
+      .withFailureHandler(
+        function(msg, element) {
+          $('#add-row').css('background-color', 'red');
+          $('#add-row').html(msg);
+        })
+      .withUserObject(this)
+      .startNewRow();
   }
 
   </script>
