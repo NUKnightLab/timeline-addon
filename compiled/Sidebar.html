@@ -1,3 +1,7 @@
+<!-- TODO:
+  3. change add/edit event tabs by adding a "new row" option to the bottom of the row select
+-->
+
 <!DOCTYPE html>
 <html>
 
@@ -244,6 +248,8 @@ input[type='text']:focus{
     green = "#00C853",
     red = "#F44336";
 
+var currentRowID;
+
   $(document).ready(function() {
     $('.edit-event-element').css('display', 'none');
     $('#show-add-event').addClass('current-mode');
@@ -251,7 +257,9 @@ input[type='text']:focus{
     // refresh row list automatically
     setInterval(function() {
       getAllRows();
-    }, 1000);
+      // kind of works but not really
+      $('.edit-select-list').find('#' + currentRowID).addClass('selected');
+    }, 3000);
 
     for(var i = 0; i < 24; i++) {
       if (i < 10) {
@@ -269,6 +277,8 @@ input[type='text']:focus{
       $('.select-minute').append('<option value="' + i + '">' + i + '</option>');
       $('.select-second').append('<option value="' + i + '">' + i + '</option>');
     }
+
+    $('input').change(pushEdits);
 
     $(".required").change(function() {
       $(this).css("color", checkRequired($(this)));
@@ -318,6 +328,7 @@ input[type='text']:focus{
     $('.edit-select-list').children('.edit-select-row').each(function(i) {
       $(this).removeClass('selected');
     })
+    currentRowID = $(this).attr('id');
     $(this).addClass('selected');
   });
 
@@ -484,7 +495,6 @@ input[type='text']:focus{
             function(msg, element) {
               $('#submit-bar').val("New row added");
               element.disabled = false;
-              clearFields();
             })
           .withFailureHandler(
             function(msg, element) {
@@ -493,7 +503,6 @@ input[type='text']:focus{
             })
           .withUserObject(this)
           .editData(getFields());
-
   }
 
   function clearFields() {

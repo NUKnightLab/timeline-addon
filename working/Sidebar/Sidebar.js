@@ -3,6 +3,8 @@ var gray = "#c9c9c9",
     green = "#00C853",
     red = "#F44336";
 
+var currentRowID;
+
   $(document).ready(function() {
     $('.edit-event-element').css('display', 'none');
     $('#show-add-event').addClass('current-mode');
@@ -10,7 +12,9 @@ var gray = "#c9c9c9",
     // refresh row list automatically
     setInterval(function() {
       getAllRows();
-    }, 1000);
+      // kind of works but not really
+      $('.edit-select-list').find('#' + currentRowID).addClass('selected');
+    }, 3000);
 
     for(var i = 0; i < 24; i++) {
       if (i < 10) {
@@ -50,6 +54,8 @@ var gray = "#c9c9c9",
     });
 
     $('#edit-event').click(pushEdits);
+    $('input').change(pushEdits);
+    $('select').change(pushEdits);
 
     $('#show-add-event').click(function() {
       $('.new-event-element').css('display', 'inline-block');
@@ -77,6 +83,7 @@ var gray = "#c9c9c9",
     $('.edit-select-list').children('.edit-select-row').each(function(i) {
       $(this).removeClass('selected');
     })
+    currentRowID = $(this).attr('id');
     $(this).addClass('selected');
   });
 
@@ -243,7 +250,6 @@ var gray = "#c9c9c9",
             function(msg, element) {
               $('#submit-bar').val("New row added");
               element.disabled = false;
-              clearFields();
             })
           .withFailureHandler(
             function(msg, element) {
@@ -252,7 +258,6 @@ var gray = "#c9c9c9",
             })
           .withUserObject(this)
           .editData(getFields());
-
   }
 
   function clearFields() {
