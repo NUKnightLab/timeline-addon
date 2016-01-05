@@ -11,11 +11,9 @@ var currentRowID;
     currentRowID = "row-0";
     $("#row-0").addClass('selected');
 
-    // refresh row list automatically
     setInterval(function() {
-      getAllRows();
-      // kind of works but not really
-      $('.edit-select-list').find('#' + currentRowID).addClass('selected');
+      getAllRows(currentRowID);
+      // $('#' + currentRowID).addClass('selected');
     }, 3000);
 
     for(var i = 0; i < 24; i++) {
@@ -264,7 +262,7 @@ var currentRowID;
     $('li').remove('#add-row');
   }
 
-  function getAllRows() {
+  function getAllRows(currentID) {
     google.script.run
       .withSuccessHandler(
         function(rows) {
@@ -274,7 +272,15 @@ var currentRowID;
             if (rows[i] === "") {
               rows[i] = "&nbsp;";
             }
-            $('.edit-select-list').append('<li class="edit-select-row" id="row-' + i + '">' + rows[i] + '</li>');
+
+            var rowID = "row-" + i;
+            var classes = "edit-select-row ";
+
+            if (rowID === currentID) {
+              classes += "selected";
+            }
+
+            $('.edit-select-list').append('<li class="' + classes + '" id="' + rowID + '">' + rows[i] + '</li>');
           }
 
           $('.edit-select-list').append('<li id="add-row">+ Add Row</li>');

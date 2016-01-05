@@ -7,7 +7,11 @@
 
   <style>
     /* grunt inline's way of doing things */
-    .title {
+    body {
+  margin-bottom: 10%;
+}
+
+.title {
   font-weight: bold;
   margin-left: 5%;
   font-size: 1em;
@@ -225,9 +229,6 @@ input[type='text']:focus{
     <div class='background'>
       <input type='text' name='background' placeholder='Background' class='optional'>
     </div>
-    <div id='submit-bar'>
-      <input type='submit' value='Add Event' id='add-event' class='new-event-element'>
-    </div>
   </form>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -246,11 +247,9 @@ var currentRowID;
     currentRowID = "row-0";
     $("#row-0").addClass('selected');
 
-    // refresh row list automatically
     setInterval(function() {
       getAllRows(currentRowID);
-      // kind of works but not really
-      $('.edit-select-list').find('#' + currentRowID).addClass('selected');
+      // $('#' + currentRowID).addClass('selected');
     }, 3000);
 
     for(var i = 0; i < 24; i++) {
@@ -469,7 +468,7 @@ var currentRowID;
       google.script.run
           .withSuccessHandler(
             function(msg, element) {
-              $('#submit-bar').val("New row added");
+
             })
           .withFailureHandler(
             function(msg, element) {
@@ -499,7 +498,7 @@ var currentRowID;
     $('li').remove('#add-row');
   }
 
-  function getAllRows(selectedRow) {
+  function getAllRows(currentID) {
     google.script.run
       .withSuccessHandler(
         function(rows) {
@@ -509,7 +508,15 @@ var currentRowID;
             if (rows[i] === "") {
               rows[i] = "&nbsp;";
             }
-            $('.edit-select-list').append('<li class="edit-select-row" id="row-' + i + '">' + rows[i] + '</li>');
+
+            var rowID = "row-" + i;
+            var classes = "edit-select-row ";
+
+            if (rowID === currentID) {
+              classes += "selected";
+            }
+
+            $('.edit-select-list').append('<li class="' + classes + '" id="' + rowID + '">' + rows[i] + '</li>');
           }
 
           $('.edit-select-list').append('<li id="add-row">+ Add Row</li>');
