@@ -110,7 +110,7 @@ function appendData(data) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getActiveSheet();
 
-  validateData(data);
+  // validateData(data);
   sheet.appendRow(data);
 }
 
@@ -121,8 +121,7 @@ function editData(data) {
 
   var range = sheet.getRange(cell.getRow(), 1, 1, 18);
 
-  validateData(data);
-
+  // validateData(data);
   range.setValues([data]);
 }
 
