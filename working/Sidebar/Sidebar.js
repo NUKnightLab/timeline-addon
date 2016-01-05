@@ -6,9 +6,14 @@ var gray = "#c9c9c9",
 var currentRowID;
 
   $(document).ready(function() {
+    getAllRows();
+    getRowData(0);
+    currentRowID = "row-0";
+    $("#row-0").addClass('selected');
+
     // refresh row list automatically
     setInterval(function() {
-      getAllRows(currentRowID);
+      getAllRows();
       // kind of works but not really
       $('.edit-select-list').find('#' + currentRowID).addClass('selected');
     }, 3000);
@@ -54,24 +59,6 @@ var currentRowID;
     $('input').change(pushEdits);
     $('select').change(pushEdits);
 
-    $('#show-add-event').click(function() {
-      $('.new-event-element').css('display', 'inline-block');
-      $('.edit-event-element').css('display', 'none');
-      $('#show-edit-event').removeClass('current-mode');
-      $('#show-add-event').addClass('current-mode');
-
-      clearFields();
-    });
-
-    $('#show-edit-event').click(function() {
-      $('.edit-event-element').css('display', 'inline-block');
-      $('.new-event-element').css('display', 'none');
-      $('#show-edit-event').addClass('current-mode');
-      $('#show-add-event').removeClass('current-mode');
-
-      clearFields();
-      getAllRows();
-    });
   });
 
   $(document).on('click', '.edit-select-row', function() {
@@ -198,7 +185,7 @@ var currentRowID;
             })
           .withFailureHandler(
             function(msg, element) {
-              showError(msg, $('#submit-bar'));
+              console.error(msg);
               element.disabled = false;
             })
           .withUserObject(this)
@@ -238,8 +225,8 @@ var currentRowID;
       })
       .withFailureHandler(
         function(msg, element) {
-          showError(msg, $('#submit-bar'));
-      })
+          console.error(msg);
+        })
       .getRowData(actualRow);
   }
 
@@ -247,11 +234,11 @@ var currentRowID;
       google.script.run
           .withSuccessHandler(
             function(msg, element) {
-              $('#submit-bar').val("New row added");
+
             })
           .withFailureHandler(
             function(msg, element) {
-              showError(msg, $('#submit-bar'));
+              console.error(msg);
             })
           .withUserObject(this)
           .editData(getFields());
@@ -277,7 +264,7 @@ var currentRowID;
     $('li').remove('#add-row');
   }
 
-  function getAllRows(selectedRow) {
+  function getAllRows() {
     google.script.run
       .withSuccessHandler(
         function(rows) {
@@ -294,7 +281,7 @@ var currentRowID;
         })
       .withFailureHandler(
         function(msg, element) {
-          showError(msg, $('#submit-bar'));
+          console.error(msg);
         })
       .withUserObject(this)
       .getAllRows();
@@ -308,7 +295,7 @@ var currentRowID;
         })
       .withFailureHandler(
         function(msg, element) {
-
+          console.error(msg);
         })
       .withUserObject(this)
       .startNewRow();
