@@ -249,7 +249,6 @@ var currentRowID;
 
     setInterval(function() {
       getAllRows(currentRowID);
-      // $('#' + currentRowID).addClass('selected');
     }, 3000);
 
     for(var i = 0; i < 24; i++) {
@@ -307,6 +306,12 @@ var currentRowID;
 
   $(document).on('click', '#add-row', function() {
     startNewRow();
+    getRowData(parseInt($(this).attr('id').substring(4)));
+    $('.edit-select-list').children('.edit-select-row').each(function(i) {
+      $(this).removeClass('selected');
+    })
+    currentRowID = $(this).attr('id');
+    $(this).addClass('selected');
   });
 
   function checkRequired(element) {
@@ -519,7 +524,12 @@ var currentRowID;
             $('.edit-select-list').append('<li class="' + classes + '" id="' + rowID + '">' + rows[i] + '</li>');
           }
 
-          $('.edit-select-list').append('<li id="add-row">+ Add Row</li>');
+          var addID = "add-row";
+          var addClass = "";
+          if (addID === currentID) {
+            addClass = "selected";
+          }
+          $('.edit-select-list').append('<li id="' + addID + '" class="' + addClass +'">+ Add Row</li>');
         })
       .withFailureHandler(
         function(msg, element) {
