@@ -4,12 +4,10 @@ var gray = "#c9c9c9",
     red = "#F44336";
 
 var currentRowID;
-
   $(document).ready(function() {
-    getAllRows();
+    getAllRows("row-0");
     getRowData(0);
     currentRowID = "row-0";
-    $("#row-0").addClass('selected');
 
     setInterval(function() {
       getAllRows(currentRowID);
