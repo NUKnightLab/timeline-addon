@@ -1,7 +1,3 @@
-<!-- TODO:
-  3. change add/edit event tabs by adding a "new row" option to the bottom of the row select
--->
-
 <!DOCTYPE html>
 <html>
 
@@ -537,16 +533,14 @@ var currentRowID;
   }
 
   function startNewRow() {
-    $('#add-row').css('background-color', 'blue');
     google.script.run
       .withSuccessHandler(
         function(msg, element) {
-          $('#add-row').css('background-color', 'green');
+          clearFields();
         })
       .withFailureHandler(
         function(msg, element) {
-          $('#add-row').css('background-color', 'red');
-          $('#add-row').html(msg);
+
         })
       .withUserObject(this)
       .startNewRow();

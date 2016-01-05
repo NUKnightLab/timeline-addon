@@ -301,7 +301,7 @@ var currentRowID;
     google.script.run
       .withSuccessHandler(
         function(msg, element) {
-
+          clearFields();
         })
       .withFailureHandler(
         function(msg, element) {
