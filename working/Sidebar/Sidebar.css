@@ -119,14 +119,20 @@ input[type='text']:focus{
   padding-left: 4px;
 }
 
-.edit-select-list li:hover{
+.edit-select-list li#add-row {
+  border-left: 4px solid #00C853;
+}
+
+.edit-select-list li:hover,
+.edit-select-list li.selected{
   background-color: #E0E0E0;
   cursor: pointer;
   border-left: 4px solid #9e9e9e;
 }
 
-.edit-select-list li.selected{
-  background-color: #E0E0E0;
-  cursor: pointer;
-  border-left: 4px solid #9e9e9e;
+.edit-select-list li#add-row:hover,
+.edit-select-list li#add-row.selected {
+  background-color: #00C853;
+  color: white;
+  border-left: 4px solid #2E7D32;
 }
