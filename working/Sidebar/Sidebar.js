@@ -4,11 +4,12 @@ var gray = "#c9c9c9",
     red = "#F44336";
 
 var currentRowID;
+var lastRow;
 
 var keys = {
   shift: false,
-  left: false,
-  right: false
+  up: false,
+  down: false
 }
 
 $(document).ready(function() {
@@ -85,28 +86,28 @@ $(document).on('click', '#add-row', function() {
 
 
 $(document).keydown(function(e) {
-  if (e.keyCode == 37) {
-    keys['left'] = true;
-  } else if (e.keyCode == 39) {
-    keys['right'] = true;
+  if (e.keyCode == 38) {
+    keys['up'] = true;
+  } else if (e.keyCode == 40) {
+    keys['down'] = true;
   } else if (e.keyCode == 16) {
     keys['shift'] = true;
   }
 
-  if (keys['shift'] && keys['left'] && !keys['right']) {
+  if (keys['shift'] && keys['up'] && !keys['down']) {
     getAdjacentRow(-1);
   }
 
-  if (keys['shift'] && !keys['left'] && keys['right']) {
+  if (keys['shift'] && !keys['up'] && keys['down']) {
     getAdjacentRow(1)
   }
 });
 
 $(document).keyup(function(e) {
-  if (e.keyCode == 37) {
-    keys['left'] = false;
-  } else if (e.keyCode == 39) {
-    keys['right'] = false;
+  if (e.keyCode == 38) {
+    keys['up'] = false;
+  } else if (e.keyCode == 40) {
+    keys['down'] = false;
   } else if (e.keyCode == 16) {
     keys['shift'] = false;
   }
@@ -306,7 +307,7 @@ function getAllRows(currentID) {
     .withSuccessHandler(
       function(rows) {
         removeOldRows();
-
+        lastRow = rows.length;
         for (var i = 0; i < rows.length; i++) {
           if (rows[i] === "") {
             rows[i] = "&nbsp;";
@@ -352,14 +353,17 @@ function startNewRow() {
 }
 
 function getAdjacentRow(offset) {
-  clearFields();
   adjRow = parseInt(currentRowID.substring(4)) + offset;
-  getRowData(adjRow);
 
-  $('.edit-select-list').children('.edit-select-row').each(function(i) {
-    $(this).removeClass('selected');
-  })
+  if (adjRow >= 0 && adjRow < lastRow) {
+    clearFields();
+    getRowData(adjRow);
 
-  currentRowID = 'row-' + adjRow;
-  $('#' + currentRowID).addClass('selected');
+    $('.edit-select-list').children('.edit-select-row').each(function(i) {
+      $(this).removeClass('selected');
+    })
+
+    currentRowID = 'row-' + adjRow;
+    $('#' + currentRowID).addClass('selected');
+  }
 }
