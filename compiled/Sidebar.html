@@ -146,6 +146,22 @@ input[type='text']:focus{
   border-left: 4px solid #2E7D32;
 }
 
+.shortcut-buttons {
+  margin: 0 auto;
+  margin-top: 10%;
+  text-align: center;
+}
+
+.shortcut-buttons button {
+  height: 50px;
+  line-height: 12px;
+}
+
+.shortcut-buttons span {
+  color: #969696;
+  font-size: 8pt;
+}
+
   </style>
 
 </head>
@@ -236,7 +252,10 @@ input[type='text']:focus{
       <input type='text' name='background' placeholder='Background' class='optional'>
     </div>
   </form>
-
+  <div class="shortcut-buttons">
+    <button class='previous-shortcut-button' type="button" name="button">Previous Row <br> <span>Shift + &uarr;</span></button>
+    <button class='next-shortcut-button' type="button" name="button">Next Row <br> <span>Shift + &darr;</span></button>
+  </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>
     // grunt inline's way of doing things
@@ -303,6 +322,14 @@ $(document).ready(function() {
   $('#edit-event').click(pushEdits);
   $('input').change(pushEdits);
   $('select').change(pushEdits);
+
+  $('.previous-shortcut-button').click(function() {
+    getAdjacentRow(-1);
+  });
+
+  $('.next-shortcut-button').click(function() {
+    getAdjacentRow(1);
+  });
 
 });
 

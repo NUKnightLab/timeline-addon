@@ -136,3 +136,19 @@ input[type='text']:focus{
   color: white;
   border-left: 4px solid #2E7D32;
 }
+
+.shortcut-buttons {
+  margin: 0 auto;
+  margin-top: 10%;
+  text-align: center;
+}
+
+.shortcut-buttons button {
+  height: 50px;
+  line-height: 12px;
+}
+
+.shortcut-buttons span {
+  color: #969696;
+  font-size: 8pt;
+}

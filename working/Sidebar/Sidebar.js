@@ -62,6 +62,14 @@ $(document).ready(function() {
   $('input').change(pushEdits);
   $('select').change(pushEdits);
 
+  $('.previous-shortcut-button').click(function() {
+    getAdjacentRow(-1);
+  });
+
+  $('.next-shortcut-button').click(function() {
+    getAdjacentRow(1);
+  });
+
 });
 
 $(document).on('click', '.edit-select-row', function() {
