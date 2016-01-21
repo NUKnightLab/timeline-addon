@@ -239,8 +239,8 @@ function addData() {
 }
 
 function getRowData(row) {
-  actualRow = row + 2
-  // console.log('getting row ' + actualRow);
+  actualRow = row + 2;
+  window.scroll(0, 0);
 
   google.script.run
     .withSuccessHandler(function(data) {
