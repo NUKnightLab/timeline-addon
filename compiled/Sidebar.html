@@ -388,7 +388,7 @@ function checkRequired(element) {
     return gray;
   }
 
-  if (Number.isInteger(parseInt(element.val()))) {
+  if (!isNaN(parseFloat(element.val())) && isFinite(element.val())) {
     return green;
   }
 
