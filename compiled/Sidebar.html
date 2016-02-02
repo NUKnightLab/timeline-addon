@@ -407,7 +407,7 @@ function checkOptionalNum(element) {
     return gray;
   }
 
-  return Number.isInteger(parseInt(element.val())) ? green : red;
+  return !isNaN(parseFloat(element.val())) && isFinite(element.val()) ? green : red;
 }
 
 function resetInputColors() {
