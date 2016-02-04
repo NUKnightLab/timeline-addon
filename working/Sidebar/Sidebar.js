@@ -121,13 +121,16 @@ $(document).keyup(function(e) {
   }
 });
 
+function isNum(num){
+  return !isNaN(parseFloat(num)) && isFinite(num);
+}
 
 function checkRequired(element) {
   if (element.val() == "") {
-    return gray;
+    return red;
   }
 
-  if (!isNaN(parseFloat(element.val())) && isFinite(element.val())) {
+  if (isNum(element.val())) {
     return green;
   }
 
@@ -146,7 +149,7 @@ function checkOptionalNum(element) {
     return gray;
   }
 
-  return !isNaN(parseFloat(element.val())) && isFinite(element.val()) ? green : red;
+  return isNum(element.val()) ? green : red;
 }
 
 function resetInputColors() {
@@ -156,9 +159,9 @@ function resetInputColors() {
 }
 
 function getFields() {
-    var startYear = Number.isInteger(parseInt($('input[name=start-year]').val())) ? $('input[name=start-year]').val() : "",
-        startMonth = $('input[name=start-month]').val(),
-        startDay = $('input[name=start-day]').val();
+    var startYear = isNum($('input[name=start-year]').val()) ? $('input[name=start-year]').val() : "",
+        startMonth = isNum($('input[name=start-month]').val()) ? $('input[name=start-year]').val() : "",
+        startDay = isNum($('input[name=start-day]').val()) ? $('input[name=start-year]').val() : "";
 
     var startTime = "";
 
@@ -171,9 +174,9 @@ function getFields() {
                     $('select[name=start-second]').val();
         }
 
-    var endYear = $('input[name=end-year]').val(),
-        endMonth = $('input[name=end-month]').val(),
-        endDay = $('input[name=end-day]').val();
+    var endYear = isNum($('input[name=end-year]').val()) ? $('input[name=end-year]').val() : "",
+        endMonth = isNum($('input[name=end-month]').val()) ? $('input[name=end-year]').val() : "",
+        endDay = isNum($('input[name=end-day]').val()) ? $('input[name=end-year]').val() : "";
 
     var endTime = "";
 
