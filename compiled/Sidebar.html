@@ -421,8 +421,8 @@ function resetInputColors() {
 
 function getFields() {
     var startYear = isNum($('input[name=start-year]').val()) ? $('input[name=start-year]').val() : "",
-        startMonth = isNum($('input[name=start-month]').val()) ? $('input[name=start-year]').val() : "",
-        startDay = isNum($('input[name=start-day]').val()) ? $('input[name=start-year]').val() : "";
+        startMonth = isNum($('input[name=start-month]').val()) ? $('input[name=start-month]').val() : "",
+        startDay = isNum($('input[name=start-day]').val()) ? $('input[name=start-day]').val() : "";
 
     var startTime = "";
 
@@ -436,8 +436,8 @@ function getFields() {
         }
 
     var endYear = isNum($('input[name=end-year]').val()) ? $('input[name=end-year]').val() : "",
-        endMonth = isNum($('input[name=end-month]').val()) ? $('input[name=end-year]').val() : "",
-        endDay = isNum($('input[name=end-day]').val()) ? $('input[name=end-year]').val() : "";
+        endMonth = isNum($('input[name=end-month]').val()) ? $('input[name=end-month]').val() : "",
+        endDay = isNum($('input[name=end-day]').val()) ? $('input[name=end-day]').val() : "";
 
     var endTime = "";
 
@@ -449,7 +449,6 @@ function getFields() {
                   $('select[name=end-minute]').val() + ':' +
                   $('select[name=end-second]').val();
         }
-
 
     var displayDate = $('input[name=display-date]').val(),
         headline = $('input[name=headline]').val(),

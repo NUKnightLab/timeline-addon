@@ -125,12 +125,6 @@ function editData(data) {
   range.setValues([data]);
 }
 
-function validateData(data) {
-  if (data[0] == "") {
-    throw 'Invalid start year.';
-  }
-}
-
 function addTemplate() {
  var ss = SpreadsheetApp.getActiveSpreadsheet();
  var sheet = ss.getSheets()[0];
@@ -139,7 +133,6 @@ function addTemplate() {
   if (range.isBlank() == true) {
     range.setValues(template);
   }
-
 }
 
 function checkSheet() {
