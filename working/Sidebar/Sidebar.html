@@ -7,7 +7,6 @@
 
   <style>
     /* grunt inline's way of doing things */
-    <inline src='Sidebar.css'/>
   </style>
 
 </head>
@@ -19,11 +18,13 @@
       <ul class='edit-select-list'>
       </ul>
     </div>
-    <div class='headline'>
-      <input type='text' name='headline' placeholder='Headline' class='optional'>
+    <div class='form-group'>
+      <label for="headline">Headline</label>
+      <input type='text' id='headline' class='optional'>
     </div>
-    <div class='text'>
-      <input type='text' name='text' placeholder='Text' class='optional'>
+    <div class='form-group'>
+      <label for="text">Text</label>
+      <input type='text' id='text' class='optional'>
     </div>
     <div class='dates'>
       <div class='dates-fields'>
